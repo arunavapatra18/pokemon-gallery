@@ -3,15 +3,16 @@ import axios from "axios";
 import "bulma/css/bulma.css";
 
 import './App.scss';
-import PokemonCard from "./components/PokemonCard";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
+import PokemonList from "./components/PokemonList";
+import Footer from "./components/Footer"
 
 class App extends React.Component {
   constructor(){
     super()
     this.state = {
       url: "https://pokeapi.co/api/v2/pokemon/",
-      pokemon: null
+      pokemons: []
     }
   }
 
@@ -19,17 +20,18 @@ class App extends React.Component {
 
   async componentDidMount(){
     const response = await axios.get(this.state.url)
-    //console.log(response.data.results[0]);
     this.setState({
-      pokemon: response.data.results
+      pokemons: response.data.results
     })
+    //console.log(this.state.pokemons)
   }
 
   render(){
     return (
       <div className="App">
-        <Navbar />
-        <PokemonCard />
+        <Header />
+        <PokemonList pokemon={this.state.pokemons} />
+        <Footer />
       </div>
     );
   }
