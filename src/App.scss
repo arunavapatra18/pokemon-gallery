@@ -26,15 +26,28 @@
     .card-header{
         justify-content: space-between;
         padding: 0.5rem;
+        .title{
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+    .card-image{
+        margin: 2rem 0rem;
+        text-align: center;
+        img{
+            height: 10rem;
+            width: 10rem;
+            object-fit: scale-down;
+        }
     }
 }
 
 .list{
     padding: 2rem;
-    height: 80vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 1.5rem;
 }
 
 .footer{
