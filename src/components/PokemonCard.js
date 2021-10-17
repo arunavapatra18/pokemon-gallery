@@ -11,22 +11,18 @@ export default class PokemonCard extends React.Component {
       photoUrl: "https://img.pokemondb.net/artwork/" + props.poke.name + ".jpg",
       types: [],
       stats: [],
+      id: null
     };
-    const statsObj = {
-      "HP": null,
-      "ATK": null,
-      "DEF": null,
-      "SP.ATK": null,
-      "SP.DEF": null
-    }
   }
 
   async componentDidMount() {
     const res = await axios.get(this.state.url);
     this.setState({
       types: res.data.types,
-      stats: res.data.stats,
+      stats: res.data.stats.map((stat) => [stat.base_stat]),
+      id: res.data.id
     });
+    //console.log(this.state.stats);
   }
 
   render() {
@@ -49,7 +45,26 @@ export default class PokemonCard extends React.Component {
           <img src={this.state.photoUrl} alt={this.state.name} />
         </div>
         <footer className="card-footer">
-          
+          <div className="card-footer-item">
+            <p>HP</p>
+            <p> {this.state.stats[0]}</p>
+          </div>
+          <div className="card-footer-item">
+            <p>ATK</p>
+            <p>{this.state.stats[1]}</p>
+          </div>
+          <div className="card-footer-item">
+            <p>DEF</p>
+            <p>{this.state.stats[2]}</p>
+          </div>
+          <div className="card-footer-item">
+            <p>S.ATK</p>
+            <p>{this.state.stats[3]}</p>
+          </div>
+          <div className="card-footer-item">
+            <p>S.DEF</p>
+            <p>{this.state.stats[4]}</p>
+          </div>
         </footer>
       </div>
     );
